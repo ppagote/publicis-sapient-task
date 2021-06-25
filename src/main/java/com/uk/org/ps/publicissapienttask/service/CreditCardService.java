@@ -1,6 +1,5 @@
 package com.uk.org.ps.publicissapienttask.service;
 
-import com.uk.org.ps.publicissapienttask.dto.CreditCardDetailsDTO;
 import com.uk.org.ps.publicissapienttask.exception.CardAlreadyExistsException;
 import com.uk.org.ps.publicissapienttask.exception.InvalidCardException;
 import com.uk.org.ps.publicissapienttask.model.CreditCardDetailsModel;
@@ -10,7 +9,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +25,7 @@ public class CreditCardService implements ICreditCardService {
      */
     @Override
     public List<CreditCardDetailsModel> getAllDetails() {
-        List<CreditCardDetailsModel> creditCardDetailsList = new ArrayList<>();
-        creditCardRepository.findAll(Sort.by("id").ascending()).forEach(creditCardDetailsList::add);
-        return creditCardDetailsList;
+        return new ArrayList<>(creditCardRepository.findAll(Sort.by("id").ascending()));
     }
 
     /**
@@ -56,15 +52,13 @@ public class CreditCardService implements ICreditCardService {
      * Checks if credit card is already added
      *
      * @param creditCardNumber Credit Card Number
-     * @return CreditCardDetailsModel Object
      */
     @Override
-    public CreditCardDetailsModel findByCreditCardNumber(String creditCardNumber) {
-        CreditCardDetailsModel byccNumber = creditCardRepository
+    public void findByCreditCardNumber(String creditCardNumber) {
+        CreditCardDetailsModel cardDetailsModel = creditCardRepository
                 .findByccNumber(creditCardNumber);
-        if (byccNumber != null) {
+        if (cardDetailsModel != null) {
             throw new CardAlreadyExistsException("Credit Card number:: " + creditCardNumber + " already exists");
         }
-        return byccNumber;
     }
 }

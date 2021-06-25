@@ -1,9 +1,7 @@
 package com.uk.org.ps.publicissapienttask.service;
 
-import com.uk.org.ps.publicissapienttask.dto.CreditCardDetailsDTO;
 import com.uk.org.ps.publicissapienttask.model.CreditCardDetailsModel;
 
-import java.math.BigInteger;
 import java.util.List;
 
 public interface ICreditCardService {
@@ -12,5 +10,5 @@ public interface ICreditCardService {
 
     CreditCardDetailsModel addDetails(CreditCardDetailsModel creditCardDetails);
 
-    CreditCardDetailsModel findByCreditCardNumber(String creditCardNumber);
+    void findByCreditCardNumber(String creditCardNumber);
 }

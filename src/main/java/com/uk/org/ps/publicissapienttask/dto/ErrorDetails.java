@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
 
 import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -16,7 +17,7 @@ public class ErrorDetails {
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    private  LocalDateTime timestamp;
-    private  String message;
-    private  String status;
+    private LocalDateTime timestamp;
+    private String message;
+    private String status;
 }

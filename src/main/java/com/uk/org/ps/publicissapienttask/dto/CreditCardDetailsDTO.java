@@ -2,10 +2,11 @@ package com.uk.org.ps.publicissapienttask.dto;
 
 import io.swagger.annotations.ApiModel;
 import lombok.*;
-import org.hibernate.validator.constraints.CreditCardNumber;
 
-import javax.validation.constraints.*;
-import java.math.BigInteger;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.PositiveOrZero;
 
 @ApiModel(description = "Details about the credit cards")
 @Getter
@@ -19,7 +20,7 @@ public class CreditCardDetailsDTO {
     private String userName;
 
     @NotNull(message = "Credit Card number is mandatory.")
-    @Pattern(regexp="^[0-9]{1,19}",message="Credit Card number must contain only digits, must be positive number and max length can be 19")
+    @Pattern(regexp = "^[0-9]{1,19}", message = "Credit Card number must contain only digits, must be positive number and max length can be 19")
     private String ccNumber;
 
     @NotNull(message = "Credit Card limit is mandatory.")

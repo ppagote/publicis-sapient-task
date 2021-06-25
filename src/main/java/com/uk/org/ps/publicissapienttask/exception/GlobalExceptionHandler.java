@@ -46,17 +46,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             MethodArgumentNotValidException ex, HttpHeaders headers,
             HttpStatus status, WebRequest request) {
 
-        /*Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", status.value());*/
-
         String errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.joining(", "));
 
-        // body.put("errors", errors);
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), errors, status.name());
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
