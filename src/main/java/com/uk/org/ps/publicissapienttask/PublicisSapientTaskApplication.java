@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PublicisSapientTaskApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PublicisSapientTaskApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PublicisSapientTaskApplication.class, args);
+    }
 
 }

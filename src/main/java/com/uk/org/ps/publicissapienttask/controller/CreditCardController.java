@@ -27,6 +27,8 @@ public class CreditCardController {
             @ApiResponse(code = 200, message = "Success", response = CreditCardDetailsModel.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetails.class),
             @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetails.class),
+            @ApiResponse(code = 406, message = "Not Acceptable", response = ErrorDetails.class),
+            @ApiResponse(code = 403, message = "Forbidden", response = ErrorDetails.class)
     })
     public CreditCardDetailsModel addDetails(
             @ApiParam(required = true, name = "creditCard", value = "Add credit Card")
@@ -35,7 +37,6 @@ public class CreditCardController {
         return creditCardService.addDetails(creditCardDetailsDto);
     }
 
-//TODO:: error if content type is incorrect
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetch all credit card",
             notes = "Retrieving the collection of credit card", response = CreditCardDetailsModel[].class)
