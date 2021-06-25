@@ -7,7 +7,10 @@
 <details open="open">
    <ul>
       <li>
-         <a href="#technology-stack---other-open-source-libraries">Technology stack &amp; other Open-source libraries</a>
+          <a href="#requirement">Requirement</a>
+      </li>
+      <li>
+         <a href="#technology-stack-&-other-open---source-libraries">Technology stack &amp; other Open-source libraries</a>
          <ul>
             <li><a href="#data">Data</a></li>
             <li><a href="#server---backend">Server - Backend</a></li>
@@ -20,7 +23,6 @@
          <ul>
             <li><a href="#running-the-application-with-ide">Running the application with IDE</a></li>
             <li><a href="#running-the-application-with-maven">Running the application with Maven</a></li>
-            <li><a href="#running-the-application-with-executable-jar">Running the application with Executable JAR</a></li>
             <li>
                <a href="#creating-executable-jar-and-then-running-the-application">Creating executable JAR and then running the application</a>
                <ul>
@@ -51,6 +53,10 @@
       <li><a href="#contact">Contact</a></li>
    </ul>
 </details>
+
+### Requirement
+Requirement document is available at path: 
+**\artifacts\Credit Card Processing Task**
 
 ### Technology stack & other Open-source libraries
 
@@ -120,23 +126,6 @@ $ git clone https://github.com/ppagote/publicis-sapient-task.git
 $ cd publicis-sapient-task
 $ mvn spring-boot:run
 ```
-#### Running the application with Executable JAR
-
-Run the jar by double-clicking on it
-or by using the command
-
-```shell
-$ git clone https://github.com/ppagote/publicis-sapient-task.git
-$ cd publicis-sapient-task/jar
-$ java -jar target/publicis-sapient-task-0.0.1-SNAPSHOT.jar
-```
-
-To shutdown the jar, follow the below mentioned steps on a Windows machine.
-
-* In command prompt execute the **jcmd** command to print a list of all running Java processes
-* **Taskkill /PID PROCESS_ID_OF_RUNNING_APP /F** execute this command by replacing the **PROCESS_ID_OF_RUNNING_APP**
-  with the actual process id of the running jar found out from executing the previous command
-* Press Ctrl+C
 
 #### Creating executable JAR and then running the application
 
@@ -150,7 +139,7 @@ $ mvn package -DskipTests
 $ java -jar target/publicis-sapient-task-0.0.1-SNAPSHOT.jar
 ```
 
-To shutdown the jar, follow the below mentioned steps on a Windows machine.
+To shut down the jar, follow the below mentioned steps on a Windows machine.
 
 * In command prompt execute the **jcmd** command to print a list of all running Java processes
 * **Taskkill /PID PROCESS_ID_OF_RUNNING_APP /F** execute this command by replacing the **PROCESS_ID_OF_RUNNING_APP**
@@ -190,7 +179,7 @@ This will create a detailed HTML style report showing code coverage statistics g
 
 ### Testing with Postman Runner
 
-Import the **PublicisSapientTask.postman_collection** file into postman and run the API tests (Spring Boot service should be running).
+Import the **\artifacts\PublicisSapientTask.postman_collection** file into postman and run the API tests (Spring Boot service should be running).
 
 ### Testing with Maven
 
