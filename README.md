@@ -52,7 +52,7 @@
    </ul>
 </details>
 
-## Technology stack & other Open-source libraries
+### Technology stack & other Open-source libraries
 
 ### Data
 
@@ -113,11 +113,11 @@ in the `com.uk.org.ps.publicissapienttask.PublicisSapientTaskApplication` class 
 
 Alternatively you can use
 the [Spring Boot Maven plugin](https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html)
-like so:
+like so (Maven should be installed in the system and mvn command is accessible):
 
 ```shell
 $ git clone https://github.com/ppagote/publicis-sapient-task.git
-$ cd hrs-task
+$ cd publicis-sapient-task
 $ mvn spring-boot:run
 ```
 #### Running the application with Executable JAR
@@ -190,7 +190,7 @@ This will create a detailed HTML style report showing code coverage statistics g
 
 ### Testing with Postman Runner
 
-Import the **PublicisSapientTask.postman_collection** file into postman and run the API tests.
+Import the **PublicisSapientTask.postman_collection** file into postman and run the API tests (Spring Boot service should be running).
 
 ### Testing with Maven
 
