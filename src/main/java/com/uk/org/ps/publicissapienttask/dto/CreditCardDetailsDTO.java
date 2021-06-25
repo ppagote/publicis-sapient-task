@@ -3,10 +3,7 @@ package com.uk.org.ps.publicissapienttask.dto;
 import io.swagger.annotations.ApiModel;
 import lombok.*;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.*;
 
 @ApiModel(description = "Details about the credit cards")
 @Getter
@@ -16,7 +13,9 @@ import javax.validation.constraints.PositiveOrZero;
 @ToString
 public class CreditCardDetailsDTO {
 
-    @NotEmpty(message = "User Name is mandatory.")
+    //@NotNull(message = "User Name is mandatory.")
+    //@NotEmpty(message = "User Name should not be empty.")
+    @NotBlank(message = "User Name is mandatory.")
     private String userName;
 
     @NotNull(message = "Credit Card number is mandatory.")
