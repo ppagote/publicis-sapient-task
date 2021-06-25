@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import javax.validation.constraints.*;
+import java.math.BigInteger;
 
 @ApiModel(description = "Details about the credit cards")
 @Getter
@@ -17,11 +18,9 @@ public class CreditCardDetailsDTO {
     @NotEmpty(message = "User Name is mandatory.")
     private String userName;
 
-    //TODO:: length restrictions
     @NotNull(message = "Credit Card number is mandatory.")
-    @Digits(integer = 19, fraction = 0, message = "Credit card number cannot be greater than 19 digits.")
-    @Positive(message = "Credit Card number should be positive.")
-    private long ccNumber;
+    @Pattern(regexp="^[0-9]{1,19}",message="Credit Card number must contain only digits, must be positive number and max length can be 19")
+    private String ccNumber;
 
     @NotNull(message = "Credit Card limit is mandatory.")
     @PositiveOrZero(message = "Credit Card limit should be positive or zero.")

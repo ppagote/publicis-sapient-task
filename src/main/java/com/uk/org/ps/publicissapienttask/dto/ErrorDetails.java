@@ -1,19 +1,22 @@
 package com.uk.org.ps.publicissapienttask.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import lombok.*;
 
 import java.time.LocalDateTime;
-
+@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Getter
 @Setter
 public class ErrorDetails {
 
-    private final LocalDateTime timestamp;
-    private final String message;
-    private final String status;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private  LocalDateTime timestamp;
+    private  String message;
+    private  String status;
 }

@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,19 +39,17 @@ public class CreditCardService implements ICreditCardService {
      * @return CreditCardDetailsModel Object
      */
     @Override
-    public CreditCardDetailsModel addDetails(CreditCardDetailsDTO creditCardDetails) {
-        CreditCardDetailsModel creditCardDetailsModel = new CreditCardDetailsModel();
-        creditCardDetailsModel.setCcLimit(creditCardDetails.getCcLimit());
-        creditCardDetailsModel.setUserName(creditCardDetails.getUserName());
-        creditCardDetailsModel.setCcNumber(creditCardDetails.getCcNumber());
+    public CreditCardDetailsModel addDetails(CreditCardDetailsModel creditCardDetails) {
 
-        if (!ValidateCreditCardNumber.validate(String.valueOf(creditCardDetails.getCcNumber()))) {
-            throw new InvalidCardException("Credit Card number:: " + creditCardDetails.getCcNumber() + " is invalid");
+        String creditCardNumber = creditCardDetails.getCcNumber();
+
+        if (!ValidateCreditCardNumber.validate(creditCardNumber)) {
+            throw new InvalidCardException("Credit Card number:: " + creditCardNumber + " is invalid");
         }
 
-        findByCreditCardNumber(creditCardDetailsModel.getCcNumber());
+        findByCreditCardNumber(creditCardNumber);
 
-        return creditCardRepository.save(creditCardDetailsModel);
+        return creditCardRepository.save(creditCardDetails);
     }
 
     /**
@@ -60,7 +59,7 @@ public class CreditCardService implements ICreditCardService {
      * @return CreditCardDetailsModel Object
      */
     @Override
-    public CreditCardDetailsModel findByCreditCardNumber(Long creditCardNumber) {
+    public CreditCardDetailsModel findByCreditCardNumber(String creditCardNumber) {
         CreditCardDetailsModel byccNumber = creditCardRepository
                 .findByccNumber(creditCardNumber);
         if (byccNumber != null) {

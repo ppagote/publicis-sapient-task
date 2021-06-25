@@ -4,6 +4,7 @@ import com.uk.org.ps.publicissapienttask.dto.CreditCardDetailsDTO;
 import com.uk.org.ps.publicissapienttask.dto.ErrorDetails;
 import com.uk.org.ps.publicissapienttask.model.CreditCardDetailsModel;
 import com.uk.org.ps.publicissapienttask.service.CreditCardService;
+import com.uk.org.ps.publicissapienttask.service.ICreditCardService;
 import io.swagger.annotations.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -18,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CreditCardController {
 
-    private final CreditCardService creditCardService;
+    private final ICreditCardService creditCardServiceInterface;
 
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Add credit card details",
@@ -34,7 +35,12 @@ public class CreditCardController {
             @ApiParam(required = true, name = "creditCard", value = "Add credit Card")
             @RequestBody @Valid CreditCardDetailsDTO creditCardDetailsDto) {
 
-        return creditCardService.addDetails(creditCardDetailsDto);
+        CreditCardDetailsModel creditCardDetailsModel = new CreditCardDetailsModel();
+        creditCardDetailsModel.setCcLimit(creditCardDetailsDto.getCcLimit());
+        creditCardDetailsModel.setUserName(creditCardDetailsDto.getUserName());
+        creditCardDetailsModel.setCcNumber(creditCardDetailsDto.getCcNumber());
+
+        return creditCardServiceInterface.addDetails(creditCardDetailsModel);
     }
 
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -47,6 +53,6 @@ public class CreditCardController {
     })
     public List<CreditCardDetailsModel> fetchAllDetails() {
 
-        return creditCardService.getAllDetails();
+        return creditCardServiceInterface.getAllDetails();
     }
 }
