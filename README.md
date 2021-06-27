@@ -182,7 +182,7 @@ This will create a detailed HTML style report showing code coverage statistics g
 
 ### Testing with Postman Runner
 
-Import the `\artifacts\PublicisSapientTask.postman_collection` file into postman and run the API tests (Spring Boot service should be running).
+Import the `\artifacts\PublicisSapientTask.postman_collection.json` file into postman and run the API tests (Spring Boot service should be running).
 
 ### Testing with Maven
 

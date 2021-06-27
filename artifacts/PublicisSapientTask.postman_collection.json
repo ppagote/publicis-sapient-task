@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "23fd7c45-750c-4422-a931-e25da0bfcce2",
+		"name": "PublicisSapientTask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cc/v1/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cc",
+						"v1",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Add Details WIth incorrect credit card Number",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcmFuYXYiLCJleHAiOjE2MjQ4MTMxOTd9.gJt3LCbKTwZrfuKd3Zv0ReAtla0c6g5apDF9dZ1PeH3-cXjhe47rk94LOir7jpdtnLXISFlxEAyreKiGSHZX8Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ccLimit\": 1,\r\n    \"ccNumber\": \"012850003580200q\",\r\n    \"userName\": \"Pranav\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cc/v1/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cc",
+						"v1",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "Create User",
+					"host": [
+						"Create User"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"pranav\",\r\n    \"password\": \"pranav\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/v1/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
