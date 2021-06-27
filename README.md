@@ -196,7 +196,7 @@ $ mvn clean test
 Following below steps user can use the credit card application:
 * User needs to register themselves by passing the details as seen in Swagger documentation
 </br>  
-<img src="artifacts/registerUser.PNG" alt="register" width="80" height="80" />
+<img src="artifacts/registerUser.PNG" alt="register" />
 ## Documentation
 
 * [Swagger](http://localhost:8080/swagger-ui/) - `http://localhost:8080/swagger-ui/`- Documentation & Testing
