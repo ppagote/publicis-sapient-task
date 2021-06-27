@@ -22,7 +22,9 @@ public class CreditCardController {
 
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Add credit card details",
-            notes = "Add a new credit card details", response = CreditCardDetailsModel.class)
+            notes = "Add a new credit card details",
+            authorizations = { @Authorization(value="authkey") },
+            response = CreditCardDetailsModel.class)
     @ApiResponses({
             @ApiResponse(code = 200, message = "Success", response = CreditCardDetailsModel.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetails.class),
@@ -44,7 +46,9 @@ public class CreditCardController {
 
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetch all credit card",
-            notes = "Retrieving the collection of credit card", response = CreditCardDetailsModel[].class)
+            notes = "Retrieving the collection of credit card",
+            authorizations = { @Authorization(value="authkey") },
+            response = CreditCardDetailsModel[].class)
     @ApiResponses({
             @ApiResponse(code = 200, message = "Success", response = CreditCardDetailsModel[].class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetails.class),

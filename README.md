@@ -49,7 +49,10 @@
             <li><a href="#testing-with-maven">Testing with Maven</a></li>
          </ul>
       </li>
- <li><a href="#documentation">Documentation</a></li>
+      <li>
+          <a href="#using-application">Using Application</a>
+      </li>
+      <li><a href="#documentation">Documentation</a></li>
       <li><a href="#contact">Contact</a></li>
    </ul>
 </details>
@@ -188,7 +191,12 @@ Import the **\artifacts\PublicisSapientTask.postman_collection** file into postm
 ```shell
 $ mvn clean test
 ```
+### Using Application
 
+Following below steps user can use the credit card application:
+* User needs to register themselves by passing the details as seen in Swagger documentation
+</br>  
+<img src="artifacts/registerUser.PNG" alt="register" width="80" height="80" />
 ## Documentation
 
 * [Swagger](http://localhost:8080/swagger-ui/) - `http://localhost:8080/swagger-ui/`- Documentation & Testing
