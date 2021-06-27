@@ -197,12 +197,23 @@ Following below steps user can use the credit card application:
 * User needs to register themselves by passing the details as seen in Swagger documentation
 </br>  
 <img src="artifacts/registerUser.PNG" alt="register" />
+  </br>
+* After successful user registration, use the credentials to login
+  </br>  
+  <img src="artifacts/loginUser.PNG" alt="login" />
+  </br>
+  * After successful login, JWT token will be received which needs to be passed to every request in credit card application.
+ </br>  
+    <img src="artifacts/authDetails.PNG" alt="auth" />
+    </br>
 ## Documentation
 
 * [Swagger](http://localhost:8080/swagger-ui/) - `http://localhost:8080/swagger-ui/`- Documentation & Testing
+</br>  
+NOTE:: Spring security provides "/login" method which accepts username & password in the body, so "/login" details are not available in Swagger.
+
 * [Swagger](http://localhost:8080/v2/api-docs)
     - `http://localhost:8080/v2/api-docs`- Documentation & Testing
-
 <!-- CONTACT -->
 
 ## Contact
