@@ -30,10 +30,9 @@ public class UserController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetails.class),
             @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetails.class),
     })
-    public String addDetails(
+    public UserModel addDetails(
             @ApiParam(required = true, name = "user", value = "Add user")
             @RequestBody @Valid UserDTO user) {
-
         return userService.addDetails(user);
     }
 

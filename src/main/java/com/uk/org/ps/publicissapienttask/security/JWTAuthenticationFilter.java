@@ -41,8 +41,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                     .lines()
                     .collect(Collectors.joining("\n"));
             JSONObject jsonObject = new JSONObject(text);
-          /*  User creds = new ObjectMapper()
-                    .readValue(req.getInputStream(), User.class);*/
             User creds = new User(jsonObject.getString("username"),
                     jsonObject.getString("password"), new ArrayList<>());
             return authenticationManager.authenticate(
@@ -66,9 +64,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
                 .sign(Algorithm.HMAC512(SecurityConstants.SECRET.getBytes()));
 
-        String body = ((User) auth.getPrincipal()).getUsername() + " " + token;
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("username", ((User) auth.getPrincipal()).getUsername());
+        jsonObject.put("token", token);
 
-        res.getWriter().write(body);
+        res.getWriter().write(jsonObject.toString());
         res.getWriter().flush();
     }
 }

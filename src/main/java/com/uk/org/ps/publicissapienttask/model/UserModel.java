@@ -1,5 +1,6 @@
 package com.uk.org.ps.publicissapienttask.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,10 +22,12 @@ public class UserModel implements Serializable {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
+    @Email
     private String username;
 
     @Column(name = "password", nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(name = "first_name", nullable = false)
@@ -33,8 +36,8 @@ public class UserModel implements Serializable {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "email", nullable = false, unique = true)
+    /*@Column(name = "email", nullable = false, unique = true)
     @Email
-    private String email;
+    private String email;*/
 
 }
