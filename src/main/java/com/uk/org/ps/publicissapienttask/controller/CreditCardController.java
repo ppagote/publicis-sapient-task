@@ -52,7 +52,8 @@ public class CreditCardController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Success", response = CreditCardDetailsModel[].class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetails.class),
-            @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetails.class)
+            @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetails.class),
+            @ApiResponse(code = 403, message = "Forbidden", response = ErrorDetails.class)
     })
     public List<CreditCardDetailsModel> fetchAllDetails() {
 

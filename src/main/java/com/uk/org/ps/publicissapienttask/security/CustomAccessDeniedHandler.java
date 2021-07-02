@@ -1,6 +1,8 @@
 package com.uk.org.ps.publicissapienttask.security;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.uk.org.ps.publicissapienttask.dto.ErrorDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +26,9 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
             throws IOException {
         logger.error(e.getLocalizedMessage(), e);
 
-        ErrorDetails message = new ErrorDetails(LocalDateTime.now(),
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
                 "Invalid Authorization token", FORBIDDEN.name());
+        String message = new ObjectMapper().writer().writeValueAsString(errorDetails);
         /*String message = RestResponse.builder()
                 .status(FORBIDDEN)
                 .message("Invalid Authorization token")
@@ -34,6 +37,6 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
         response.setStatus(FORBIDDEN.value());
         response.setContentType(APPLICATION_JSON_VALUE);
-        response.getWriter().write(message.toString());
+        response.getWriter().write(message);
     }
 }

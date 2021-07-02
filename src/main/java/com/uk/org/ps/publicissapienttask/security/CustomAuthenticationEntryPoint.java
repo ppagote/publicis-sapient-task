@@ -1,6 +1,7 @@
 package com.uk.org.ps.publicissapienttask.security;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uk.org.ps.publicissapienttask.dto.ErrorDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,8 +26,9 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
             throws IOException {
         logger.error(e.getLocalizedMessage(), e);
 
-        ErrorDetails message = new ErrorDetails(LocalDateTime.now(),
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
                 "Insufficient authentication details", FORBIDDEN.name());
+        String message = new ObjectMapper().writer().writeValueAsString(errorDetails);
        /* String message = RestResponse.builder()
                 .status(UNAUTHORIZED)
                 .error("Unauthenticated")
@@ -36,6 +38,6 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
         response.setStatus(UNAUTHORIZED.value());
         response.setContentType(APPLICATION_JSON_VALUE);
-        response.getWriter().write(message.toString());
+        response.getWriter().write(message);
     }
 }
