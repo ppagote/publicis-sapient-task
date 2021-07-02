@@ -23,8 +23,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().authorizeRequests()
-                .antMatchers("/h2-console/**", "/swagger*/**", "/v2/api-docs", "/configuration/**",  "/webjars/**").permitAll()
-                .and().csrf().ignoringAntMatchers("/h2-console/**", "/swagger*/**", "/v2/api-docs", "/configuration/**",  "/webjars/**")
+                .antMatchers("/h2-console/**", "/swagger*/**", "/v2/api-docs", "/configuration/**", "/webjars/**").permitAll()
+                .and().csrf().ignoringAntMatchers("/h2-console/**", "/swagger*/**", "/v2/api-docs", "/configuration/**", "/webjars/**")
                 .and().headers().frameOptions().sameOrigin();
 
         http.cors().and().authorizeRequests().antMatchers("/api/user/v1/register", "/api/user/v1/login")
@@ -32,7 +32,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint()).and()
+                .addFilter(new JWTAuthorizationFilter(authenticationManager(), new CustomAccessDeniedHandler()))
                 // this disables session creation on Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable();

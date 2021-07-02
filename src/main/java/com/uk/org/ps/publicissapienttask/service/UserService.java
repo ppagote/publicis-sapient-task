@@ -2,6 +2,7 @@ package com.uk.org.ps.publicissapienttask.service;
 
 import com.uk.org.ps.publicissapienttask.config.PasswordEncoder;
 import com.uk.org.ps.publicissapienttask.dto.UserDTO;
+import com.uk.org.ps.publicissapienttask.exception.UserNameAlreadyExistsException;
 import com.uk.org.ps.publicissapienttask.model.UserModel;
 import com.uk.org.ps.publicissapienttask.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -20,23 +21,25 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     public UserModel addDetails(UserDTO userDto) {
+        UserModel user = userRepository.findByUsername(userDto.getUsername());
+        if (user != null) {
+            throw new UserNameAlreadyExistsException("User with username:" + userDto.getUsername() + " already exists.");
+        }
         userDto.setPassword(passwordEncoder.bCryptPasswordEncoder()
                 .encode(userDto.getPassword()));
 
         UserModel userModel = new UserModel();
-        //userModel.setEmail(userDto.getEmail());
         userModel.setUsername(userDto.getUsername());
         userModel.setPassword(userDto.getPassword());
         userModel.setFirstName(userDto.getFirstName());
         userModel.setLastName(userDto.getLastName());
-
         return userRepository.save(userModel);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException{
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         UserModel user = userRepository.findByUsername(s);
-        if (user !=null && user.getUsername().equals(s)) {
+        if (user != null && user.getUsername().equals(s)) {
             return new org.springframework.security.core.userdetails.User(user.getUsername(),
                     user.getPassword(), new ArrayList<>());
         } else {

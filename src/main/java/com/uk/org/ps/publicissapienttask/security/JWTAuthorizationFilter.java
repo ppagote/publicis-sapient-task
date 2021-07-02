@@ -3,9 +3,11 @@ package com.uk.org.ps.publicissapienttask.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.uk.org.ps.publicissapienttask.constants.SecurityConstants;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -16,26 +18,33 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
+    private final AccessDeniedHandler accessDeniedHandler;
 
-    public JWTAuthorizationFilter(AuthenticationManager authManager) {
+    public JWTAuthorizationFilter(AuthenticationManager authManager, AccessDeniedHandler accessDeniedHandler) {
         super(authManager);
+        this.accessDeniedHandler = accessDeniedHandler;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest req,
                                     HttpServletResponse res,
                                     FilterChain chain) throws IOException, ServletException {
-        String header = req.getHeader(SecurityConstants.HEADER_STRING);
+        try {
+            String header = req.getHeader(SecurityConstants.HEADER_STRING);
 
-        if (header == null || !header.startsWith(SecurityConstants.TOKEN_PREFIX)) {
+            if (header == null || !header.startsWith(SecurityConstants.TOKEN_PREFIX)) {
+                chain.doFilter(req, res);
+                return;
+            }
+
+            UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
             chain.doFilter(req, res);
-            return;
+        } catch (Exception e) {
+            accessDeniedHandler.handle(req, res, new AccessDeniedException(e.getLocalizedMessage(), e));
         }
 
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        chain.doFilter(req, res);
     }
 
     // Reads the JWT from the Authorization header, and then uses JWT to validate the token
@@ -52,9 +61,12 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             if (user != null) {
                 // new arraylist means authorities
                 return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+            } else {
+                throw new AccessDeniedException("Failed to parse authentication token");
             }
 
-            return null;
+
+            // return null;
         }
 
         return null;
