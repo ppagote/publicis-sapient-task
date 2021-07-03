@@ -27,7 +27,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         logger.error(e.getLocalizedMessage(), e);
 
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
-                "Insufficient authentication details", FORBIDDEN.name());
+                "Incorrect authentication details", FORBIDDEN.name());
         String message = new ObjectMapper().writer().writeValueAsString(errorDetails);
        /* String message = RestResponse.builder()
                 .status(UNAUTHORIZED)

@@ -5,14 +5,15 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.uk.org.ps.publicissapienttask.dto.CreditCardDetailsDTO;
 import com.uk.org.ps.publicissapienttask.dto.ErrorDetails;
 import com.uk.org.ps.publicissapienttask.model.CreditCardDetailsModel;
+import com.uk.org.ps.publicissapienttask.service.CustomUserDetailsService;
 import com.uk.org.ps.publicissapienttask.service.ICreditCardService;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
@@ -23,22 +24,24 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 
 @WebMvcTest(CreditCardController.class)
 class CreditCardControllerTest {
 
     @MockBean
     private ICreditCardService mockCreditCardService;
+
+    @MockBean
+    private CustomUserDetailsService mockUserService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -53,7 +56,10 @@ class CreditCardControllerTest {
        mockMvc.perform(post("/api/cc/v1/add")
                .content(new ObjectMapper().writeValueAsString(creditCardDetailsDto))
                .contentType(MediaType.APPLICATION_JSON)
-               .accept(MediaType.APPLICATION_JSON))
+               .accept(MediaType.APPLICATION_JSON)
+               .with(csrf())
+               .with(user("duke"))
+       )
                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
@@ -67,7 +73,10 @@ class CreditCardControllerTest {
         mockMvc.perform(post("/api/cc/v1/add")
                 .content(new ObjectMapper().writeValueAsString(creditCardDetailsDto))
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON)
+                .with(csrf())
+                .with(user("duke"))
+        )
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
@@ -82,7 +91,10 @@ class CreditCardControllerTest {
         mockMvc.perform(post("/api/cc/v1/add")
                 .content(new ObjectMapper().writeValueAsString(creditCardDetailsDto))
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON)
+                .with(csrf())
+                .with(user("duke"))
+        )
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
@@ -97,7 +109,10 @@ class CreditCardControllerTest {
         mockMvc.perform(post("/api/cc/v1/add")
                 .content(new ObjectMapper().writeValueAsString(creditCardDetailsDto))
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON)
+                .with(csrf())
+                .with(user("duke"))
+        )
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
@@ -111,7 +126,10 @@ class CreditCardControllerTest {
         mockMvc.perform(post("/api/cc/v1/add")
                 .content(new ObjectMapper().writeValueAsString(creditCardDetailsDto))
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON)
+                .with(csrf())
+                .with(user("duke"))
+        )
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
         // Verify the results
@@ -140,7 +158,10 @@ class CreditCardControllerTest {
         mockMvc.perform(post("/api/cc/v1/add")
                 .content(new ObjectMapper().writeValueAsString(creditCardDetailsDto))
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON)
+                .with(csrf())
+                .with(user("duke"))
+        )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isMap())
@@ -161,7 +182,10 @@ class CreditCardControllerTest {
         MvcResult mvcResult = mockMvc.perform(post("/api/cc/v1/add")
                 .content(new ObjectMapper().writeValueAsString(creditCardDetailsDto))
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON)
+                .with(csrf())
+                .with(user("duke"))
+        )
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andReturn();
 
@@ -190,7 +214,10 @@ class CreditCardControllerTest {
         MvcResult mvcResult = mockMvc.perform(post("/api/cc/v1/add")
                 .content(new ObjectMapper().writeValueAsString(creditCardDetailsDto))
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON)
+                .with(csrf())
+                .with(user("duke"))
+        )
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andReturn();
 
@@ -220,7 +247,10 @@ class CreditCardControllerTest {
         MvcResult mvcResult = mockMvc.perform(post("/api/cc/v1/add")
                 .content(new ObjectMapper().writeValueAsString(creditCardDetailsDto))
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON)
+                .with(csrf())
+                .with(user("duke"))
+        )
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andReturn();
 
@@ -244,7 +274,9 @@ class CreditCardControllerTest {
         // Run the test
         mockMvc.perform(get("/api/cc/v1/list")
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON)
+                .with(csrf())
+                .with(user("duke")))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
         // Verify the results
@@ -263,7 +295,10 @@ class CreditCardControllerTest {
         // Run the test
         mockMvc.perform(get("/api/cc/v1/list")
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON)
+                .with(csrf())
+                .with(user("duke"))
+        )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[*].ccLimit").isNotEmpty())
@@ -281,7 +316,10 @@ class CreditCardControllerTest {
         // Run the test
         mockMvc.perform(get("/api/cc/v1/list")
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON)
+                .with(csrf())
+                .with(user("duke"))
+        )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isEmpty());
