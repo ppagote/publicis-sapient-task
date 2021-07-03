@@ -1,6 +1,5 @@
 package com.uk.org.ps.publicissapienttask.service;
 
-import com.uk.org.ps.publicissapienttask.config.PasswordEncoderByCrypt;
 import com.uk.org.ps.publicissapienttask.dto.UserDTO;
 import com.uk.org.ps.publicissapienttask.exception.UserNameAlreadyExistsException;
 import com.uk.org.ps.publicissapienttask.model.UserModel;

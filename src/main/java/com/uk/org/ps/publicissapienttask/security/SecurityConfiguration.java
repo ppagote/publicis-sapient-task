@@ -1,8 +1,6 @@
 package com.uk.org.ps.publicissapienttask.security;
 
-import com.uk.org.ps.publicissapienttask.config.PasswordEncoderByCrypt;
 import com.uk.org.ps.publicissapienttask.service.CustomUserDetailsService;
-import com.uk.org.ps.publicissapienttask.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
